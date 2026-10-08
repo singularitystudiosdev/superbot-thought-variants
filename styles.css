@@ -1,0 +1,268 @@
+/* Every coordinate below is in reference pixels: the stage is the reference
+   frame (1456x819) and app.js scales it to fit the window. */
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-Regular.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-Medium.woff2") format("woff2"); font-weight: 500; font-display: block; }
+@font-face { font-family: "Inter"; src: url("assets/fonts/Inter-SemiBold.woff2") format("woff2"); font-weight: 600; font-display: block; }
+@font-face { font-family: "Roboto"; src: url("assets/fonts/Roboto-latin.woff2") format("woff2"); font-weight: 100 900; font-display: block; }
+/* Google Sans Medium, subset to the button labels (OFL 1.1), from superbot/site/assets/waitlist.css */
+@font-face {
+  font-family: "Google Sans Label"; font-style: normal; font-weight: 500; font-display: swap;
+  src: url(data:font/woff2;base64,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) format("woff2");
+  unicode-range: U+20, U+43, U+47, U+4C, U+53, U+65, U+67, U+68, U+69, U+6B, U+6C, U+6E, U+6F, U+70, U+74, U+75, U+77;
+}
+
+:root {
+  --bg: #000000;
+  --ink: #ffffff;
+  --fg: #ececec;
+  --muted: #9a9a9a;
+  --legal-ink: #8c8c8c;
+  --accent: #4d8aff;
+  --accent-ink: #0d0d0d;
+  --hairline: #262626;
+  --field: #0d0d0d;
+  --font-ui: "SF Pro Rounded", "SF Pro Display", -apple-system, system-ui, "Segoe UI", sans-serif;
+  --font-google: "Google Sans", "Google Sans Label", Roboto, var(--font-ui);
+}
+
+* { box-sizing: border-box; margin: 0; }
+html, body { height: 100%; background: var(--bg); overflow: hidden; }
+body { font-family: var(--font-ui); color: var(--ink); -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* centred on both axes by CSS alone; app.js only supplies the scale */
+.stage {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  width: 1456px;
+  height: 819px;
+  transform: translate(-50%, -50%) scale(var(--fit, 1));
+  transform-origin: 50% 50%;
+}
+.stage > * { position: absolute; }
+
+/* background marks */
+.marks, .marks > * { position: absolute; }
+.marks { inset: 0; pointer-events: none; }
+.plus { width: 33.4px; height: 32.7px; filter: blur(0.45px); }
+.plus::before, .plus::after { content: ""; position: absolute; background: currentColor; }
+.plus::before { left: 0; right: 0; top: 15.5px; height: 5.2px; }
+.plus::after { top: 0; bottom: 0; left: 14.1px; width: 5.2px; }
+.plus-a { left: 499.2px; top: -1.2px; color: #424242; }
+.plus-b { left: 1085.4px; top: 784.6px; color: #121212; filter: blur(1px); }
+.sq { width: 10px; height: 12px; background: #111111; filter: blur(1px); }
+.sq-a { left: 117.5px; top: 89.5px; }
+.sq-b { left: 976.5px; top: 88.5px; width: 12px; height: 13px; background: #383838; filter: blur(0.6px); }
+.sq-c { left: 1095px; top: 417px; }
+.sq-d { left: 937px; top: 221.5px; width: 12px; height: 13px; background: #2a2a2a; filter: blur(0.6px); }
+.dot { left: 396.5px; top: 367px; width: 2px; height: 2px; background: #3a3a3a; }
+
+/* mascot + thumb */
+.mascot { left: 0; top: 0; width: 340px; height: 320px; }
+.mark { position: absolute; left: 13.8px; top: 26.9px; width: 280px; height: 280px; overflow: visible; }
+.mark .ghost-teal { transform: translate(-1.2px, -1.4px); }
+.mark .ghost-magenta { transform: translate(0.8px, 0.8px); }
+.thumb {
+  position: absolute;
+  left: 188px;
+  top: 173.2px;
+  width: 145.5px;
+  height: 145.5px;
+  --turn: 0deg;
+  opacity: 0;
+  transform: rotate(var(--turn)) scale(0.3);
+  transition: opacity 140ms ease-in, transform 180ms ease-in;
+  pointer-events: none;
+}
+/* thumbs down is the same hand turned over */
+.thumb.is-down { --turn: 180deg; }
+.thumb.is-shown { opacity: 1; transform: rotate(var(--turn)) scale(1); transition: none; }
+.thumb.is-shown:not(.is-static) { animation: thumb-pop 560ms cubic-bezier(0.18, 1.45, 0.4, 1) both; }
+.thumb.is-down.is-shown:not(.is-static) { animation: thumb-pop 560ms cubic-bezier(0.18, 1.45, 0.4, 1) both, thumb-stern 480ms 520ms ease-in-out; }
+@keyframes thumb-pop {
+  from { opacity: 0; transform: rotate(calc(var(--turn) - 40deg)) scale(0.2); }
+  40% { opacity: 1; }
+  to { opacity: 1; transform: rotate(var(--turn)) scale(1); }
+}
+@keyframes thumb-stern {
+  0%, 100% { transform: rotate(var(--turn)) scale(1); }
+  25% { transform: rotate(calc(var(--turn) - 10deg)) scale(1.04); }
+  60% { transform: rotate(calc(var(--turn) + 8deg)) scale(1.04); }
+}
+
+/* thinking: a thought bubble off the right ear while the user is still typing
+   (variant A; variant B shows superbot-desktop's bubble instead, desk-thought.css) */
+[data-variant="b"] .thought { display: none; }
+.thought { position: absolute; left: 252px; top: 14px; width: 150px; height: 90px; opacity: 0; transform: scale(0.6); transform-origin: 8px 80px; transition: opacity 160ms ease-in, transform 160ms ease-in; pointer-events: none; }
+[data-state="judging"] .thought-bubble i { animation-duration: 0.6s; }
+:is([data-state="typing"], [data-state="judging"]) .thought { opacity: 1; transform: scale(1); transition: opacity 220ms ease-out, transform 320ms cubic-bezier(0.18, 1.4, 0.4, 1); }
+.thought > span { position: absolute; background: #1d1d1d; box-shadow: 0 0 24px rgba(255, 255, 255, 0.09); }
+.thought-trail { border-radius: 50%; animation: thought-breathe 1.6s ease-in-out infinite; }
+.thought-trail-s { left: 8px; top: 72px; width: 9px; height: 9px; }
+.thought-trail-m { left: 22px; top: 50px; width: 15px; height: 15px; animation-delay: 200ms; }
+.thought-bubble { left: 40px; top: 0; width: 104px; height: 46px; border-radius: 23px; display: flex; align-items: center; justify-content: center; gap: 9px; }
+.thought-bubble i { width: 10px; height: 10px; border-radius: 50%; background: #e9e9e9; animation: thought-dot 1.1s ease-in-out infinite; }
+.thought-bubble i:nth-child(2) { animation-delay: 160ms; }
+.thought-bubble i:nth-child(3) { animation-delay: 320ms; }
+@keyframes thought-dot {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.45; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+@keyframes thought-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+/* the laugh: superbot.gg's mascot click, copied from hero.css (.sb-glitch rules,
+   https://superbot.gg/site/assets/hero.css?v=55 lines 63-66 and 71) onto this mark */
+.mark .mark-happy { opacity: 0; }
+.mark.is-happy .mark-happy { opacity: 1; }
+.mark.is-happy .mark-eye { opacity: 0; }
+.mark.is-happy { animation: sb-mark-happy-bob 600ms ease-out; } /* deliberate */
+@keyframes sb-mark-happy-bob { 0%, 100% { transform: none; } 25% { transform: translateY(-4px); } 50% { transform: none; } 75% { transform: translateY(-4px); } }
+
+/* chat bar: the CHAT_BAR asset, scaled so its pill overfills this box by 2px and clipped round */
+.ask {
+  left: 306.5px;
+  top: 124.3px;
+  width: 1105px;
+  height: 105px;
+  border-radius: 52.5px;
+  overflow: hidden;
+  /* the asset's straight middle (x 200-1250, y 343-476 of CHAT_BAR.png, a pure
+     top-to-bottom gradient) fills the bar; the round ends come from the clip */
+  background: url("assets/chat-bar.png") no-repeat;
+  background-size: 1532.3px 646.6px;
+  background-position: -210.5px -270.8px;
+  box-shadow: 0 0 46px rgba(255, 255, 255, 0.135);
+  cursor: text;
+}
+/* empty or short, one line sits exactly where image 1's text does (11 + 83 / 2
+   = 52.5, half the bar); fit-text.js sets the size, line height and padding
+   inline once the text has to shrink */
+.ask textarea {
+  position: absolute;
+  left: 34.5px;
+  top: -0.8px;
+  width: 970px;
+  height: 105px;
+  padding: 11px 0;
+  border: 0;
+  outline: 0;
+  resize: none;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: transparent;
+  font: 700 69.2px/83px "Roboto", sans-serif;
+  letter-spacing: -0.2px;
+  color: #f2f2f2;
+  caret-color: #ffffff;
+  /* no scrollbar: the edge fades below say there is more */
+  scrollbar-width: none;
+  --fade-top: 0px;
+  --fade-bottom: 0px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 var(--fade-top), #000 calc(100% - var(--fade-bottom)), transparent);
+  transition: --fade-top 180ms ease-out, --fade-bottom 180ms ease-out;
+}
+.ask textarea::-webkit-scrollbar { display: none; }
+.ask textarea.fade-top { --fade-top: var(--fade-len, 34px); }
+.ask textarea.fade-bottom { --fade-bottom: var(--fade-len, 34px); }
+.ask textarea::placeholder { color: #535353; opacity: 1; }
+/* registered so the fade lengths animate instead of snapping */
+@property --fade-top { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --fade-bottom { syntax: "<length>"; inherits: false; initial-value: 0px; }
+.send {
+  position: absolute;
+  left: 1017.5px;
+  bottom: 20.5px;
+  width: 64px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #f2f2f2;
+  color: #0d0d0d;
+  cursor: pointer;
+  transition: background-color 160ms ease-out, color 160ms ease-out, transform 160ms ease-out;
+}
+.send svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.send:disabled { background: #2c2c2c; color: #6a6a6a; cursor: default; }
+.send:not(:disabled):hover { background: #ffffff; transform: scale(1.05); }
+.send:not(:disabled):active { transform: scale(0.94); }
+.send:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+[data-state="judging"] .send { background: #f2f2f2; color: #0d0d0d; animation: send-wait 700ms ease-in-out infinite; }
+@keyframes send-wait {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+}
+
+/* the verdict, for screen readers; shown on screen only when Jev could not answer */
+.verdict-note { left: 341px; top: 240px; margin: 0; color: #ff7a7a; font: 500 16px/24px var(--font-ui); opacity: 0; pointer-events: none; }
+[data-state="error"] .verdict-note { opacity: 1; }
+
+.confetti { left: 0; top: 0; width: 1456px; height: 819px; pointer-events: none; }
+
+/* sign-in stack. The reference renders the provider stack at 1.625x its CSS
+   size and the email block at 1.26x, so text is set at its real size (keeping
+   the font's small-size optical cut) and scaled up. */
+.auth { left: 0; top: 0; width: 1456px; height: 819px; pointer-events: none; --k-pv: 1.625; --k-em: 1.23; }
+.auth > * { position: absolute; pointer-events: auto; }
+.btn {
+  left: 421.2px;
+  width: 617.2px;
+  height: 84.5px;
+  border-radius: 13px;
+  text-decoration: none;
+  font-size: 16px;
+}
+.btn .ico { position: absolute; }
+.btn span { position: absolute; left: 69.8px; top: 50%; transform: translateY(-50%) scale(var(--k-pv)); transform-origin: 0 50%; line-height: 1; white-space: nowrap; }
+.btn-apple { top: 289.6px; background: #ffffff; color: #000000; font-weight: 600; }
+.btn-apple .ico { left: 22.8px; top: 20.2px; width: 29.3px; height: 37px; }
+.btn-apple span { margin-top: 0.8px; }
+.btn-google { top: 393.6px; background: #131314; border: 1.625px solid #8e918f; color: #e3e3e3; font-family: var(--font-google); font-weight: 500; font-size: 14px; }
+.btn-google .ico { left: 19.8px; top: 23.6px; width: 33.6px; height: 33.6px; }
+.btn-google span { margin-top: -1.6px; }
+.btn-x span { margin-top: -0.7px; }
+.btn-google span, .btn-x span { left: 68.7px; }
+.btn-x { top: 497.6px; background: var(--field); border: 1.625px solid var(--hairline); color: var(--fg); font-weight: 600; }
+.btn-x .ico { left: 22.2px; top: 27.8px; width: 29.4px; height: 26.7px; }
+
+.or { left: 428px; top: 597px; width: 589px; height: 22px; display: flex; align-items: center; gap: 16px; color: var(--muted); font-size: 14px; line-height: 1; }
+.or::before, .or::after { content: ""; flex: 1; height: 1px; background: #242424; }
+.or span { transform: translateY(-0.3px) scale(var(--k-em)); }
+
+.email { left: 428.3px; top: 630.1px; height: 52px; display: flex; gap: 8.4px; width: 479.8px; transform: scale(var(--k-em)); transform-origin: 0 0; }
+.email-input {
+  width: 272.5px;
+  height: 52px;
+  padding: 0 0 0 16px;
+  background: var(--field);
+  border: 1px solid var(--hairline);
+  border-radius: 8px;
+  color: var(--fg);
+  font: 400 16px var(--font-ui);
+  outline: 0;
+}
+.email-input::placeholder { color: var(--muted); opacity: 1; }
+.email-btn {
+  width: 198.9px;
+  height: 51.9px;
+  margin-top: 0.15px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font: 600 16px var(--font-ui);
+  cursor: pointer;
+}
+
+.legal { left: 0; width: 1445px; top: 704px; text-align: center; color: var(--legal-ink); font-size: 12px; line-height: 16px; transform: scale(var(--k-em)); transform-origin: 50% 0; }
+.legal a { text-decoration: underline 1px color-mix(in srgb, var(--legal-ink) 50%, transparent); text-underline-offset: 4px; }
+.invite { left: 0; width: 1445px; top: 745px; text-align: center; color: var(--muted); font-size: 16px; line-height: 24px; transform: scale(var(--k-em)); transform-origin: 50% 0; }
+.invite a { color: var(--accent); text-decoration: underline; }

@@ -1,0 +1,277 @@
+/* desk-thought.css: variant B's chat bar, which IS the thinking bubble: a port of superbot-desktop's
+   ThoughtBubble (apps/desktop/src/renderer/src/hub/thought-bubble.css on
+   origin/main 788a4e2ec, the folded Spotlight look) with its head row from
+   sonar-trace.css (.sb-sonar-label's sheen, .sb-sonar-clock) and the line base
+   from packages/ui status-swap.css. Rules are the desktop's own; the tokens
+   they read are pinned below from packages/tokens/dist (tokens.css, with
+   tokens.night.css's bg/raised/line, the scheme in the user's screenshot).
+   Two deliberate differences, both from the user's screenshot of the app: the
+   clock digits are the sans (Chromium has no ui-monospace, and the app paints
+   them in the UI face), and the window shows 3 rows (the app's "Thought rows"
+   pref, 1-12, default 6) so the bubble stays clear of the sign-in stack.
+   Variant B only: there is no chat box; this bubble sits where image 1's bar
+   was and thoughts stream through it nonstop (desk-thought.js). */
+
+.desk-thought {
+  --color-bg: #000000;
+  --color-raised: #101013;
+  --color-fg: #e6e8ee;
+  --color-fg-secondary: #c9ccd4;
+  --color-muted: #aeb1bc;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-24: 24px;
+  --radius-16: 16px;
+  --radius-pill: 9999px;
+  --font-ui: "SF Pro Rounded", ui-rounded, "Inter", system-ui, sans-serif;
+  --text-body: 13px;
+  --text-body--line-height: 19px;
+  --text-body--font-weight: 400;
+  --size-measure: 600px;
+  --duration-100: 100ms;
+  --duration-150: 150ms;
+  --duration-200: 200ms;
+  --duration-think-step-in: 240ms;
+  --duration-think-sheen: 1800ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-standard-decelerate: cubic-bezier(0, 0, 0, 1);
+  --ease-standard-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  --sb-thought-rows: 3;
+
+  /* where image 1's chat bar was: the bubble spans the bar's x 306-1410,
+     centred on y 170, its tail dots rising from the mascot; 1.84x the
+     desktop's size so the bubble is the bar's width */
+  display: none;
+  position: absolute;
+  left: 276.6px;
+  top: 170px;
+  transform: translateY(-50%) scale(1.84);
+  transform-origin: 0 50%;
+  pointer-events: none;
+}
+[data-variant="b"] .desk-thought { display: block; }
+[data-variant="b"] .ask { display: none; }
+
+/* the bubble holds the full measure, so new lines never resize it */
+.desk-thought .sb-thought-bubble { inline-size: var(--size-measure); }
+
+/* the stream runs far past the desktop's pace (desk-thought.js FAST, BEAT_MS:
+   a thought every ~100 ms), so its two motions are scaled to that beat: each
+   new word fades in over 80 ms instead of 200, and a new line glides up over
+   100 ms instead of 240. At the desktop's own durations the newest lines were
+   still mid-animation when the next thought landed and the window read blank. */
+.desk-thought .sb-thought-word { animation-duration: 80ms; }
+.desk-thought .sb-thought-text[data-scroll] { animation-duration: 100ms; }
+
+/* "actual speed": a hand-lettered note over the bubble's right end, the user's
+   arrow (assets/arrow.png, drawn black) shown white on the black page */
+@font-face { font-family: "Caveat"; src: url("assets/fonts/Caveat-latin.woff2") format("woff2"); font-weight: 400 700; font-display: block; }
+.speed-note { display: none; position: absolute; left: 1050.7px; top: -31.3px; width: 360px; height: 120px; pointer-events: none; }
+[data-variant="b"] .speed-note { display: block; }
+.speed-arrow { position: absolute; left: 0; top: 0; width: 150px; height: 150px; filter: invert(1); }
+.speed-text { position: absolute; left: 150px; top: 44px; font: 600 40px/1 "Caveat", cursive; color: #ffffff; white-space: nowrap; transform: rotate(-4deg); transform-origin: 0 50%; }
+
+/* ---- thought-bubble.css ---------------------------------------------------- */
+
+.sb-thought {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  flex: 0 1 auto;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.sb-thought-tail {
+  position: relative;
+  flex: none;
+  inline-size: var(--spacing-12);
+  block-size: var(--spacing-24);
+}
+
+.sb-thought-dot {
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: var(--spacing-4);
+  inline-size: var(--spacing-6);
+  block-size: var(--spacing-6);
+  border-radius: var(--radius-pill);
+  background: var(--color-muted);
+}
+
+.sb-thought-dot[data-size="small"] {
+  inset-inline-end: auto;
+  inset-inline-start: 0;
+  inset-block-start: var(--spacing-12);
+  inline-size: var(--spacing-4);
+  block-size: var(--spacing-4);
+}
+
+.sb-thought-bubble {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-inline-size: 0;
+  max-inline-size: var(--size-measure);
+  padding: var(--spacing-8) var(--spacing-12);
+  border-radius: var(--radius-16);
+  font-family: var(--font-ui);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  font-weight: var(--text-body--font-weight);
+}
+
+.sb-thought-bubble::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--color-raised);
+  pointer-events: none;
+}
+
+.sb-thought-head {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  min-inline-size: 0;
+  color: var(--color-fg);
+}
+
+.sb-thought-lines {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  max-block-size: calc(var(--sb-thought-rows, 6) * var(--text-body--line-height));
+  overflow: hidden;
+  pointer-events: none;
+}
+.sb-thought-lines[hidden] { display: none; }
+
+.sb-thought-lines[data-clipped="true"] {
+  mask-image: linear-gradient(
+    to bottom,
+    color-mix(in oklch, var(--color-fg) clamp(25%, calc((2 - var(--sb-thought-rows, 6)) * 75% + 25%), 100%), transparent),
+    var(--color-fg) var(--text-body--line-height)
+  );
+}
+
+.sb-thought-layer {
+  margin-block-end: auto;
+}
+
+.sb-thought-text {
+  margin: 0;
+  color: var(--color-fg);
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.sb-thought-text[data-scroll="a"] {
+  animation: sb-thought-scroll-a var(--duration-think-step-in) var(--ease-standard-decelerate) backwards;
+}
+
+.sb-thought-text[data-scroll="b"] {
+  animation: sb-thought-scroll-b var(--duration-think-step-in) var(--ease-standard-decelerate) backwards;
+}
+
+.sb-thought-word {
+  animation: sb-thought-word var(--duration-200) var(--ease-standard-decelerate) backwards;
+}
+
+@keyframes sb-thought-scroll-a {
+  from { transform: translateY(var(--sb-thought-shift)); }
+}
+
+@keyframes sb-thought-scroll-b {
+  from { transform: translateY(var(--sb-thought-shift)); }
+}
+
+@keyframes sb-thought-word {
+  from { opacity: 0; }
+}
+
+@keyframes sb-thought-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--spacing-4));
+  }
+}
+
+/* ---- the head row: sonar-trace.css .sb-sonar-label / .sb-sonar-clock --------- */
+
+.sb-sonar-label {
+  flex: 0 1 auto;
+  min-inline-size: 0;
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  font-weight: var(--text-body--font-weight);
+  color: var(--color-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* status-swap.css's line box */
+.sb-swap-line {
+  display: block;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* the live sheen: the same muted -> fg -> muted band on the same 220% tile and
+   steps(24) sweep as sonar-trace.css, painted with background-clip: text (the
+   desktop's own earlier form of this rule, thinking-panel.css before its
+   2026-09-26 compositor pass). The mask-clip form left a 1px seam after the
+   last glyph at this page's 1.78x scale; this form has no strip to bleed. */
+.sb-thought[data-live="true"] .sb-sonar-label .sb-swap-line {
+  color: transparent;
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 0%,
+    var(--color-muted) 35%,
+    var(--color-fg) 50%,
+    var(--color-muted) 65%,
+    var(--color-muted) 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: sb-sonar-sheen-bg var(--duration-think-sheen) steps(24, end) infinite;
+}
+
+@keyframes sb-sonar-sheen-bg {
+  from { background-position: 0% 0; }
+  to { background-position: -220% 0; }
+}
+
+
+.sb-sonar-clock {
+  margin-inline-start: calc(var(--spacing-8) * -1);
+  display: inline-flex;
+  align-items: baseline;
+  flex: none;
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+.sb-sonar-clock[hidden] { display: none; }
+
+.sb-sonar-clock-sep {
+  white-space: pre;
+}
+
+.sb-sonar-clock-digits {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}

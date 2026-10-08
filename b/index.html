@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" data-variant="b">
+<head>
+  <meta charset="utf-8">
+  <base href="../">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>superbot</title>
+  <link rel="preload" href="assets/fonts/Inter-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/Roboto-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="desk-thought.css">
+</head>
+<body>
+  <main class="stage" id="stage">
+    <div class="marks" aria-hidden="true">
+      <span class="plus plus-a"></span>
+      <span class="plus plus-b"></span>
+      <span class="sq sq-a"></span>
+      <span class="sq sq-b"></span>
+      <span class="sq sq-c"></span>
+      <span class="sq sq-d"></span>
+      <span class="dot"></span>
+    </div>
+
+    <div class="mascot" id="mascot" aria-hidden="true">
+      <svg class="mark" viewBox="0 0 100 100" focusable="false">
+        <defs>
+          <mask id="mark-face" maskUnits="userSpaceOnUse" x="-30" y="-30" width="160" height="160">
+            <g fill="#fff">
+              <rect x="14" y="32" width="72" height="54" rx="15"/>
+              <path d="M14 46V28Q14 20 21 21Q28 24 36 32Z"/>
+              <path d="M86 46V28Q86 20 79 21Q72 24 64 32Z"/>
+            </g>
+            <g fill="#000">
+              <ellipse class="mark-eye mark-eye-l" cx="35" cy="58" rx="8" ry="11"/>
+              <ellipse class="mark-eye mark-eye-r" cx="65" cy="58" rx="8" ry="11"/>
+            </g>
+            <g class="mark-happy" fill="none" stroke="#000" stroke-width="4.5" stroke-linecap="round">
+              <path d="M27 61Q35 53.5 43 61"/>
+              <path d="M57 61Q65 53.5 73 61"/>
+            </g>
+          </mask>
+        </defs>
+        <g class="mark-body">
+          <rect class="ghost-teal" x="-30" y="-30" width="160" height="160" fill="#00e5c3" mask="url(#mark-face)"/>
+          <rect class="ghost-magenta" x="-30" y="-30" width="160" height="160" fill="#c026d3" mask="url(#mark-face)"/>
+          <rect x="-30" y="-30" width="160" height="160" fill="#ffffff" mask="url(#mark-face)"/>
+        </g>
+      </svg>
+      <img class="thumb is-up" id="thumb" src="assets/thumbs-up.png" width="512" height="512" alt="">
+      <div class="thought">
+        <span class="thought-trail thought-trail-s"></span>
+        <span class="thought-trail thought-trail-m"></span>
+        <span class="thought-bubble"><i></i><i></i><i></i></span>
+      </div>
+    </div>
+
+    <form class="ask" id="ask-form" autocomplete="off">
+      <label class="sr-only" for="ask">Ask superbot</label>
+      <textarea id="ask" name="ask" rows="1" placeholder="Ask me if I can..." autocomplete="off" spellcheck="false" enterkeyhint="send"></textarea>
+      <button class="send" id="send" type="submit" aria-label="Send" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m5 12 7-7 7 7"/><path d="M12 19V5"/></svg>
+      </button>
+    </form>
+    <p class="verdict-note" id="verdict-note" role="status" aria-live="polite"></p>
+
+    <section class="auth" aria-label="Sign in">
+      <a class="btn btn-apple" href="#">
+        <svg class="ico ico-apple" viewBox="7.75 10.5 15.46 19" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path fill="currentColor" d="M15.7099491,14.8846154 C16.5675461,14.8846154 17.642562,14.3048315 18.28274,13.5317864 C18.8625238,12.8312142 19.2852829,11.852829 19.2852829,10.8744437 C19.2852829,10.7415766 19.2732041,10.6087095 19.2490464,10.5 C18.2948188,10.5362365 17.1473299,11.140178 16.4588366,11.9494596 C15.9152893,12.56548 15.4200572,13.5317864 15.4200572,14.5222505 C15.4200572,14.6671964 15.4442149,14.8121424 15.4562937,14.8604577 C15.5166879,14.8725366 15.6133185,14.8846154 15.7099491,14.8846154 Z M12.6902416,29.5 C13.8618881,29.5 14.3812778,28.714876 15.8428163,28.714876 C17.3285124,28.714876 17.6546408,29.4758423 18.9591545,29.4758423 C20.2395105,29.4758423 21.0971074,28.292117 21.9063891,27.1325493 C22.8123013,25.8038779 23.1867451,24.4993643 23.2109027,24.4389701 C23.1263509,24.4148125 20.6743484,23.4122695 20.6743484,20.5979021 C20.6743484,18.1579784 22.6069612,17.0588048 22.7156707,16.974253 C21.4353147,15.1382708 19.490623,15.0899555 18.9591545,15.0899555 C17.5217737,15.0899555 16.3501271,15.9596313 15.6133185,15.9596313 C14.8161157,15.9596313 13.7652575,15.1382708 12.521138,15.1382708 C10.1536872,15.1382708 7.75,17.0950413 7.75,20.7911634 C7.75,23.0861411 8.64383344,25.513986 9.74300699,27.0842339 C10.6851558,28.4129053 11.5065162,29.5 12.6902416,29.5 Z"/></svg>
+        <span>Continue with Apple</span>
+      </a>
+      <a class="btn btn-google" href="#">
+        <img class="ico ico-google" src="assets/google-g.svg" width="20" height="20" alt="">
+        <span>Continue with Google</span>
+      </a>
+      <a class="btn btn-x" href="#">
+        <svg class="ico ico-x" viewBox="1.254 2.25 21.492 19.5" aria-hidden="true" focusable="false"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <span>Continue with X</span>
+      </a>
+
+      <div class="or"><span>or</span></div>
+
+      <form class="email" id="email-form">
+        <input class="email-input" type="email" placeholder="you@email.com" aria-label="Email" autocomplete="email">
+        <button class="email-btn" type="submit">Continue with email</button>
+      </form>
+
+      <p class="legal"><a href="#">Terms</a> · <a href="#">Privacy</a> · 13+</p>
+      <p class="invite">have an invite code? <a href="#">enter it</a></p>
+    </section>
+    <div class="desk-thought" id="desk-thought" aria-hidden="true"></div>
+    <div class="speed-note" aria-hidden="true">
+      <img class="speed-arrow" src="assets/arrow.png" width="512" height="512" alt="">
+      <span class="speed-text">actual speed</span>
+    </div>
+    <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
